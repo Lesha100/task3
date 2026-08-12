@@ -8,5 +8,3 @@ COPY index.php /var/www/html/index.php
 COPY .htaccess /var/www/html/.htaccess
 
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-
-CMD ["sh", "-c", "sed -i \"s/Listen 80/Listen ${PORT}/\" /etc/apache2/ports.conf && sed -i \"s/:80>/:${PORT}>/\" /etc/apache2/sites-available/000-default.conf && apache2-foreground"]
