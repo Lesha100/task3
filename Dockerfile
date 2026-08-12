@@ -2,9 +2,11 @@ FROM php:8.3-apache
 
 RUN docker-php-ext-install bcmath
 
+RUN a2enmod rewrite
+
 COPY index.php /var/www/html/index.php
 COPY .htaccess /var/www/html/.htaccess
 
-RUN a2enmod rewrite
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-EXPOSE 80
+CMD ["sh", "-c", "sed -i \"s/Listen 80/Listen ${PORT}/\" /etc/apache2/ports.conf && sed -i \"s/:80>/:${PORT}>/\" /etc/apache2/sites-available/000-default.conf && apache2-foreground"]
