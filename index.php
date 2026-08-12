@@ -1,4 +1,6 @@
 <?php
+
+header('Content-Type: text/plain');
 $x = $_GET["x"] ?? null;
 $y = $_GET["y"] ?? null;
 
