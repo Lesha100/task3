@@ -1,8 +1,9 @@
-FROM php:8.3-apache
+FROM php:8.3-cli
 
 RUN docker-php-ext-install bcmath
 
-COPY index.php /var/www/html/index.php
+WORKDIR /app
 
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
-    && echo "FallbackResource /index.php" >> /etc/apache2/sites-available/000-default.conf
+COPY index.php .
+
+CMD ["sh", "-c", "php -S 0.0.0.0:${PORT:-8docker build --no-cache -t task3 .080} -t /app /app/index.php"]
